@@ -1,5 +1,5 @@
-import DynamicForm from './components/DynamicForm/dynamicForm';
-import './styles.css';
+import DynamicForm from "./components/DynamicForm/DynamicForm";
+import "./styles.css";
 
 export default function App() {
   return <DynamicForm />;

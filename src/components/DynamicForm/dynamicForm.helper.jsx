@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { v4 as uuidv4 } from 'uuid';
-import ReactJson from 'react-json-view';
-import { properties } from '../../data.json';
-import { iterateThroughObject } from '../constants/common';
-import { formSubmit, clearData } from '../../stores/form-data/form-data.actions';
-import { EditableDataTable, NumberFormattedType, renderDataInArray, SelectFieldType, TextFieldType } from '../DataFields';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
+import ReactJson from "react-json-view";
+import { properties } from "../../data.json";
+import { iterateThroughObject } from "../constants/common";
+import {
+  formSubmit,
+  clearData,
+} from "../../stores/form-data/form-data.actions";
+import {
+  EditableDataTable,
+  NumberFormattedType,
+  renderDataInArray,
+  SelectFieldType,
+  TextFieldType,
+} from "../DataFields";
 
 function RenderDynamicFields() {
   const dispatch = useDispatch();
@@ -24,19 +33,55 @@ function RenderDynamicFields() {
     dispatch(clearData());
   };
 
+  /*
+  AUTHOR : SACHIN SAKRI
+  DATE : 30/11/2020
+  DESCRIPTION : Considering dynamic form, we need to create a input field for each field.
+  Therefore using this to return dynamic fields
+*/
+
   return (
     <div className="text-left">
       <form className="form-group" onSubmit={onSubmit}>
         {Array.isArray(jsonData) &&
           jsonData.map((data) => {
-            if (data?.type === 'string' && Array.isArray(data?.enums)) {
-              return <SelectFieldType label={data?.title} key={uuidv4()} enums={data.enums} setFieldData={setFieldData} fieldData={fieldData} />;
-            } else if (data?.type === 'string' && !Array.isArray(data?.enums)) {
-              return <TextFieldType setFieldData={setFieldData} label={data?.title} key={uuidv4()} fieldData={fieldData} />;
-            } else if (data?.type === 'integer') {
-              return <NumberFormattedType setFieldData={setFieldData} label={data?.title} key={uuidv4()} fieldData={fieldData} />;
-            } else if (data?.type === 'array') {
-              return <EditableDataTable setFieldData={setFieldData} label={data?.title} properties={data?.items?.anyOf} fieldData={fieldData} />;
+            if (data?.type === "string" && Array.isArray(data?.enums)) {
+              return (
+                <SelectFieldType
+                  label={data?.title}
+                  key={uuidv4()}
+                  enums={data.enums}
+                  setFieldData={setFieldData}
+                  fieldData={fieldData}
+                />
+              );
+            } else if (data?.type === "string" && !Array.isArray(data?.enums)) {
+              return (
+                <TextFieldType
+                  setFieldData={setFieldData}
+                  label={data?.title}
+                  key={uuidv4()}
+                  fieldData={fieldData}
+                />
+              );
+            } else if (data?.type === "integer") {
+              return (
+                <NumberFormattedType
+                  setFieldData={setFieldData}
+                  label={data?.title}
+                  key={uuidv4()}
+                  fieldData={fieldData}
+                />
+              );
+            } else if (data?.type === "array") {
+              return (
+                <EditableDataTable
+                  setFieldData={setFieldData}
+                  label={data?.title}
+                  properties={data?.items?.anyOf}
+                  fieldData={fieldData}
+                />
+              );
             }
           })}
         <div className="form-group text-center">
@@ -46,7 +91,11 @@ function RenderDynamicFields() {
         </div>
       </form>
       <div className="form-group text-center">
-        <button type="button" className="btn btn-primary" onClick={handleReduxClear}>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={handleReduxClear}
+        >
           Clear Redux
         </button>
       </div>

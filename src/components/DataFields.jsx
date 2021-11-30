@@ -1,8 +1,13 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { v4 as uuidv4 } from 'uuid';
-import { properties } from '../data.json';
-import { EditTable } from './EditTable';
+/*
+  AUTHOR : SACHIN SAKRI
+  DATE : 30/11/2020
+  DESCRIPTION : Exporting all the inputs fields to the form
+*/
+
+import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { properties } from "../data.json";
+import { EditTable } from "./EditTable";
 
 export const setStateWithArrayOfObjects = (state, key, index, value) => {
   const newState = [...state];
@@ -31,17 +36,28 @@ export const TextFieldType = ({ label, type, setFieldData, fieldData }) => {
     const { name, value } = e.target;
     setTextFormData(value);
     setFieldData(setStateWithObjects(fieldData, name, value));
-    // setFieldData(setStateWithArrayOfObjects(fieldData, label, 0, data));
   };
 
   return (
     <div className="form-control mt-2">
-      <label> {label} :</label> <input type={type} value={formTextData} onChange={handleTextChange} name={label} />
+      <label> {label} :</label>{" "}
+      <input
+        type={type}
+        value={formTextData}
+        onChange={handleTextChange}
+        name={label}
+      />
     </div>
   );
 };
 
-export const SelectFieldType = ({ label, type, enums, setFieldData, fieldData }) => {
+export const SelectFieldType = ({
+  label,
+  type,
+  enums,
+  setFieldData,
+  fieldData,
+}) => {
   const [formSelectData, setFormSelectData] = useState([]);
 
   const handleSelectChange = (e) => {
@@ -52,8 +68,13 @@ export const SelectFieldType = ({ label, type, enums, setFieldData, fieldData })
 
   return (
     <div className="form-control mt-2">
-      <label> {label} :</label>{' '}
-      <select value={formSelectData} type={type} name={label} onChange={handleSelectChange}>
+      <label> {label} :</label>{" "}
+      <select
+        value={formSelectData}
+        type={type}
+        name={label}
+        onChange={handleSelectChange}
+      >
         {enums.map((enumdata) => {
           return <option key={uuidv4()}>{enumdata}</option>;
         })}
@@ -73,13 +94,25 @@ export const NumberFormattedType = ({ label, setFieldData, fieldData }) => {
 
   return (
     <div className="form-control mt-2">
-      <label> {label} :</label> <input type="number" value={formNumberData} name={label} min="0" onChange={handleNumberChange} />
+      <label> {label} :</label>{" "}
+      <input
+        type="number"
+        value={formNumberData}
+        name={label}
+        min="0"
+        onChange={handleNumberChange}
+      />
     </div>
   );
 };
 
-export const EditableDataTable = ({ label, properties, fieldData, setFieldData }) => {
-  //here we will check properites to render now of columns,
+export const EditableDataTable = ({
+  label,
+  properties,
+  fieldData,
+  setFieldData,
+}) => {
+  //here we will check properties to render now of columns,
   //however rows will be dynamic with array format
 
   const dataArray = [];
@@ -92,6 +125,12 @@ export const EditableDataTable = ({ label, properties, fieldData, setFieldData }
   });
 
   return (
-    <EditTable label={label} setFieldData={setFieldData} fieldData={fieldData} dataArray={dataArray} setStateWithObjects={setStateWithObjects} />
+    <EditTable
+      label={label}
+      setFieldData={setFieldData}
+      fieldData={fieldData}
+      dataArray={dataArray}
+      setStateWithObjects={setStateWithObjects}
+    />
   );
 };

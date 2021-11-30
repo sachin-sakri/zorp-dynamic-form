@@ -1,21 +1,28 @@
-import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import { createObjectWithArray } from './constants/common';
+import React, { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { createObjectWithArray } from "./constants/common";
 
-export const EditTable = ({ label, dataArray, fieldData, setFieldData, setStateWithObjects }) => {
+export const EditTable = ({
+  label,
+  dataArray,
+  fieldData,
+  setFieldData,
+  setStateWithObjects,
+}) => {
   const headings = dataArray.map((data) => {
     return data?.title;
   });
 
   const [rows, setRows] = useState([createObjectWithArray(dataArray)]);
 
+  const setStateWithArrayOfObjects = (state, key, index, value) => {
+    const newState = [...state];
+    newState[index][key] = value;
+    return newState;
+  };
+
   const handleChange = (idx) => (e) => {
     const { name, value } = e.target;
-    const setStateWithArrayOfObjects = (state, key, index, value) => {
-      const newState = [...state];
-      newState[index][key] = value;
-      return newState;
-    };
     setRows(setStateWithArrayOfObjects(rows, name, idx, value));
     setFieldData(setStateWithObjects(fieldData, label, rows));
   };
@@ -42,8 +49,8 @@ export const EditTable = ({ label, dataArray, fieldData, setFieldData, setStateW
                     headings.map((heading) => {
                       return (
                         <th className="text-center" key={uuidv4()}>
-                          {' '}
-                          {heading}{' '}
+                          {" "}
+                          {heading}{" "}
                         </th>
                       );
                     })}
@@ -56,7 +63,7 @@ export const EditTable = ({ label, dataArray, fieldData, setFieldData, setStateW
                       return (
                         <td key={index}>
                           <input
-                            type={data?.type === 'integer' ? 'number' : 'text'}
+                            type={data?.type === "integer" ? "number" : "text"}
                             name={data?.title}
                             value={rows[idx].data?.title}
                             onChange={handleChange(idx)}
@@ -68,7 +75,10 @@ export const EditTable = ({ label, dataArray, fieldData, setFieldData, setStateW
 
                     {idx > 0 && (
                       <td key={uuidv4()}>
-                        <button className="btn btn-outline-danger btn-sm" onClick={handleRemoveSpecificRow(idx)}>
+                        <button
+                          className="btn btn-outline-danger btn-sm"
+                          onClick={handleRemoveSpecificRow(idx)}
+                        >
                           Remove
                         </button>
                       </td>
@@ -78,7 +88,11 @@ export const EditTable = ({ label, dataArray, fieldData, setFieldData, setStateW
               </tbody>
             </table>
             <div className="text-center mb-4">
-              <button type="button" onClick={handleAddRow} className="btn btn-outline-primary btn-sm">
+              <button
+                type="button"
+                onClick={handleAddRow}
+                className="btn btn-outline-primary btn-sm"
+              >
                 Add Row
               </button>
             </div>

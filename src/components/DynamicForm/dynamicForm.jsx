@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import RenderDynamicFields from './dynamicForm.helper';
+import RenderDynamicFields from "./DynamicForm.helper";
 
 function DynamicForm() {
-  // const formData = useSelector((state) => state?.formData);
-  // console.log(formData);
+  /*
+  AUTHOR : SACHIN SAKRI
+  DATE : 30/11/2020
+  DESCRIPTION : All the fields are accessed through helper file, this is created to ease down the validation and rendering of the fields.
+*/
   return <RenderDynamicFields />;
 }
 
