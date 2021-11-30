@@ -1,0 +1,87 @@
+{
+  "properties": {
+    "name": {
+      "$id": "#/properties/name",
+      "type": "string",
+      "title": "User Name",
+      "description": "",
+      "default": "",
+      "examples": ["vivek"]
+    },
+    "city": {
+      "$id": "#/properties/city",
+      "type": "string",
+      "title": "City",
+      "enums": ["Bengaluru", "Mumbai", "NCR"],
+      "description": "",
+      "default": "",
+      "examples": ["bengaluru"]
+    },
+    "pincode": {
+      "$id": "#/properties/pincode",
+      "type": "integer",
+      "title": "Pincode",
+      "description": "",
+      "default": 0,
+      "examples": [560102]
+    },
+    "experience": {
+      "$id": "#/properties/experience",
+      "type": "array",
+      "title": "User experience details",
+      "description": "",
+      "default": [],
+      "examples": [
+        [
+          {
+            "company": "A",
+            "durationInYears": 6
+          },
+          {
+            "company": "B",
+            "durationInYears": 2
+          }
+        ]
+      ],
+      "additionalItems": true,
+      "items": {
+        "$id": "#/properties/experience/items",
+        "anyOf": [
+          {
+            "$id": "#/properties/experience/items/anyOf/0",
+            "type": "object",
+            "title": "The first anyOf schema",
+            "description": "",
+            "default": {},
+            "examples": [
+              {
+                "company": "A",
+                "durationInYears": 6
+              }
+            ],
+            "required": ["company", "durationInYears"],
+            "properties": {
+              "company": {
+                "$id": "#/properties/experience/items/anyOf/0/properties/company",
+                "type": "string",
+                "title": "Company Name",
+                "description": "",
+                "default": "",
+                "examples": ["A"]
+              },
+              "durationInYears": {
+                "$id": "#/properties/experience/items/anyOf/0/properties/durationInYears",
+                "type": "integer",
+                "title": "Duration (in years)",
+                "description": "",
+                "default": 0,
+                "examples": [6]
+              }
+            },
+            "additionalProperties": true
+          }
+        ]
+      }
+    }
+  }
+}

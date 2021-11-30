@@ -1,0 +1,21 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+label {
+  width: 100px;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
